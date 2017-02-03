@@ -14,10 +14,31 @@ app.use( '/assets', express.static( 'assets' ) );
 
 
 //makes the server respond to the '/' route and serving the 'home.ejs' template in the 'views' directory
-app.get( '/', function ( req, res ) {
+/*app.get( '/', function ( req, res ) {
     res.render( 'home', {
         message: 'The Home Page!'
     });
+});*/
+
+
+
+/*var request = require('request');
+request('https://www.leboncoin.fr/ventes_immobilieres/1076257949.htm?ca=12_s', function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+    console.log(body) // Show the HTML 
+  }
+})*/
+
+app.get( '/', function ( req, res ) {
+    request( 'https://www.leboncoin.fr/ventes_immobilieres/1076257949.htm?ca=12_s', function ( error, response, body ) {
+        if ( !error && response.statusCode == 200 ) {
+            console.log( body ) // Show the HTML 
+
+
+        }
+        res.send( body )
+    })
+
 });
 
 
